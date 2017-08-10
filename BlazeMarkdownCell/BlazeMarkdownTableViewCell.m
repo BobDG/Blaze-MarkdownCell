@@ -82,7 +82,6 @@
         //Header attributes
         NSMutableArray <NSDictionary *> *headerAttributes = [NSMutableArray new];
         if(row.markdownHeaderFonts) {
-            //headerAttributes = row.markdownHeaderFonts;
             for(UIFont *font in row.markdownHeaderFonts) {
                 [headerAttributes addObject:@{NSFontAttributeName:font, NSForegroundColorAttributeName:textColor}];
             }
