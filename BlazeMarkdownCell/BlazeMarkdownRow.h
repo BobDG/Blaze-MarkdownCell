@@ -26,6 +26,7 @@
 @property(nonatomic,strong) UIColor *markdownTextColor;
 @property(nonatomic,strong) UIColor *markdownLinksColor;
 @property(nonatomic,strong) UIColor *markdownHeaderColor;
+@property(nonatomic,strong) UIColor *markdownActiveLinksColor;
 
 //Callbacks
 @property(nonatomic,copy) void (^linkTapped)(NSURL *url);

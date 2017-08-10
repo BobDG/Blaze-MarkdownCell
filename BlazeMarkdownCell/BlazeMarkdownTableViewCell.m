@@ -43,15 +43,6 @@
              textColor = [UIColor blackColor];
         }
         
-        //LinksColor
-        UIColor *linksColor;
-        if(row.markdownLinksColor) {
-            linksColor = row.markdownLinksColor;
-        }
-        else {
-            linksColor = [UIColor blueColor];
-        }
-        
         //HeaderColor
         UIColor *headersColor;
         if(row.markdownHeaderColor) {
@@ -121,20 +112,27 @@
         NSDictionary *numberedListAttributes = @{NSFontAttributeName:defaultFont, NSForegroundColorAttributeName:textColor, NSParagraphStyleAttributeName:numberedStyle};
         self.parser.numberedListAttributes = @[numberedListAttributes];
         
-        //Links
-        self.parser.skipLinkAttribute = FALSE;
+        //Bold/Italic
         self.parser.strongAttributes = @{NSFontAttributeName:boldFont, NSForegroundColorAttributeName:textColor};
         self.parser.emphasisAttributes = @{NSFontAttributeName:italicFont, NSForegroundColorAttributeName:textColor};
-        self.parser.linkAttributes = @{NSFontAttributeName:defaultFont, NSForegroundColorAttributeName:linksColor};
+        
+        //TTT-Attributed label links color
+        self.parser.skipLinkAttribute = FALSE;
+        if(row.markdownLinksColor) {
+            self.markdownLabel.linkAttributes = @{NSFontAttributeName:defaultFont, NSForegroundColorAttributeName:row.markdownLinksColor};            
+        }
+        if(row.markdownActiveLinksColor) {
+            self.markdownLabel.activeLinkAttributes = @{NSFontAttributeName:defaultFont, NSForegroundColorAttributeName:row.markdownActiveLinksColor};
+        }
+        
+        /*** The following line is not necessary since we're using TTTAttributedLabel coloring ***/
+        //self.parser.linkAttributes = @{NSFontAttributeName:defaultFont, NSForegroundColorAttributeName:linksColor};
         
         //Generate string
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:[self.parser attributedStringFromMarkdown:row.markdownString]];
         
         //Finally set it
-        self.markdownLabel.text = attributedString;
-        
-        //TTT-AttributedLabel link attributes, necessary after setting text
-        self.markdownLabel.linkAttributes = @{NSFontAttributeName:defaultFont, NSForegroundColorAttributeName:linksColor};
+        self.markdownLabel.text = attributedString;       
     }
 }
 
@@ -148,8 +146,8 @@
     //Performance boost
     self.markdownLabel.extendsLinkTouchArea = FALSE;
     
-    //Text checking types - only link, address & phonenumber for now
-    self.markdownLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink|NSTextCheckingTypeAddress|NSTextCheckingTypePhoneNumber;
+    //Text checking types - only address & phonenumber for now. Link is already done using the parser itself, if you set this again it will reset the default links and Named links won't be colored correctly!
+    self.markdownLabel.enabledTextCheckingTypes = NSTextCheckingTypeAddress|NSTextCheckingTypePhoneNumber;
 }
 
 #pragma mark - TTTAttributedLabelDelegate

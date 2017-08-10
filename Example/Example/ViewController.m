@@ -48,6 +48,7 @@
     markdownRow.markdownDefaultFont = [UIFont systemFontOfSize:16.0f];
     markdownRow.markdownTextColor = [UIColor grayColor];
     markdownRow.markdownLinksColor = UIColorFromRGB(0xf8a19a);
+    markdownRow.markdownActiveLinksColor = [UIColor yellowColor];
     markdownRow.markdownHeaderColor = [UIColor blackColor];
     [markdownRow setLinkTapped:^(NSURL *url) {
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
@@ -59,10 +60,6 @@
         [self showMessage:[NSString stringWithFormat:@"%@", address]];
     }];
     [section addRow:markdownRow];
-    [markdownRow setConfigureCell:^(BlazeTableViewCell *aCell) {
-        BlazeMarkdownTableViewCell *cell = (BlazeMarkdownTableViewCell *)aCell;
-        cell.markdownLabel.linkAttributes = @{NSForegroundColorAttributeName:[UIColor redColor]};
-    }];
     
     //Reload
     [self.tableView reloadData];
