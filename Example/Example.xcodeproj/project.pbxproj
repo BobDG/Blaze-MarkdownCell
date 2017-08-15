@@ -15,6 +15,7 @@
 		ED0985351E1E6C5D00A3B041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED0985341E1E6C5D00A3B041 /* Assets.xcassets */; };
 		ED0985381E1E6C5D00A3B041 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0985361E1E6C5D00A3B041 /* LaunchScreen.storyboard */; };
 		ED2A1F611E1E6F2F0099242F /* MarkdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED2A1F601E1E6F2F0099242F /* MarkdownTableViewCell.xib */; };
+		ED7BA1681F432F2B00B7F4A7 /* BlazeMarkdownCell.podspec in Resources */ = {isa = PBXBuildFile; fileRef = ED7BA1671F432F2B00B7F4A7 /* BlazeMarkdownCell.podspec */; };
 		EDAE48E81F3C4A45000A0C6E /* BlazeMarkdownRow.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAE48E51F3C4A45000A0C6E /* BlazeMarkdownRow.m */; };
 		EDAE48E91F3C4A45000A0C6E /* BlazeMarkdownTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAE48E71F3C4A45000A0C6E /* BlazeMarkdownTableViewCell.m */; };
 		EDAE48EF1F3C4ABC000A0C6E /* TSBaseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAE48EC1F3C4ABC000A0C6E /* TSBaseParser.m */; };
@@ -37,6 +38,7 @@
 		ED0985371E1E6C5D00A3B041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED0985391E1E6C5D00A3B041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED2A1F601E1E6F2F0099242F /* MarkdownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkdownTableViewCell.xib; sourceTree = "<group>"; };
+		ED7BA1671F432F2B00B7F4A7 /* BlazeMarkdownCell.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BlazeMarkdownCell.podspec; path = ../BlazeMarkdownCell.podspec; sourceTree = "<group>"; };
 		EDAE48E41F3C4A45000A0C6E /* BlazeMarkdownRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlazeMarkdownRow.h; sourceTree = "<group>"; };
 		EDAE48E51F3C4A45000A0C6E /* BlazeMarkdownRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlazeMarkdownRow.m; sourceTree = "<group>"; };
 		EDAE48E61F3C4A45000A0C6E /* BlazeMarkdownTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlazeMarkdownTableViewCell.h; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		ED09851C1E1E6C5D00A3B041 = {
 			isa = PBXGroup;
 			children = (
+				ED7BA1671F432F2B00B7F4A7 /* BlazeMarkdownCell.podspec */,
 				ED0985271E1E6C5D00A3B041 /* Example */,
 				ED0985261E1E6C5D00A3B041 /* Products */,
 				47D8D8BF2E6683ECA4BE0305 /* Pods */,
@@ -211,6 +214,7 @@
 				ED0985351E1E6C5D00A3B041 /* Assets.xcassets in Resources */,
 				EDAE48F21F3C4BD7000A0C6E /* MarkdownSample.txt in Resources */,
 				ED2A1F611E1E6F2F0099242F /* MarkdownTableViewCell.xib in Resources */,
+				ED7BA1681F432F2B00B7F4A7 /* BlazeMarkdownCell.podspec in Resources */,
 				ED0985331E1E6C5D00A3B041 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

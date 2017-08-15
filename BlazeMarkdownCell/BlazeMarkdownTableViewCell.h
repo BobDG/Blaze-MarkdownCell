@@ -7,8 +7,7 @@
 //
 
 #import <Blaze/BlazeTableViewCell.h>
-
-@import TTTAttributedLabel;
+#import <TTTAttributedLabel/TTTAttributedLabel.h>
 
 @interface BlazeMarkdownTableViewCell : BlazeTableViewCell
 {
