@@ -59,7 +59,7 @@ typedef void (^TSMarkdownParserLinkFormattingBlock)(NSMutableAttributedString *a
  * Strong using strongAttributes
  * Emphasis using emphasisAttributes
  */
-+ (instancetype)standardParser;
+-(void)setup;
 
 /*
  It is recommended to use `[TSMarkdownParser new]` for an empty markdown parser.

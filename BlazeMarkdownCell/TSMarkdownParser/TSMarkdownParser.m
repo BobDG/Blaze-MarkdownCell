@@ -69,29 +69,27 @@ typedef NSFont UIFont;
     return self;
 }
 
-+ (instancetype)standardParser {
-    TSMarkdownParser *defaultParser = [self new];
-    
-    __weak __typeof(TSMarkdownParser *)weakParser = defaultParser;
-    
+-(void)setup
+{
     /* escaping parsing */
     
-    [defaultParser addCodeEscapingParsing];
+    [self addCodeEscapingParsing];
     
-    [defaultParser addEscapingParsing];
+    [self addEscapingParsing];
     
     /* block parsing */    
     
-    [defaultParser addHeaderParsingWithMaxLevel:0 leadFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, __unused NSUInteger level) {
+    __weak __typeof(self)weakSelf = self;
+    [self addHeaderParsingWithMaxLevel:0 leadFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, __unused NSUInteger level) {
         [attributedString deleteCharactersInRange:range];
     } textFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSUInteger level) {
-        [TSMarkdownParser addAttributes:weakParser.headerAttributes atIndex:level - 1 toString:attributedString range:range];
+        [TSMarkdownParser addAttributes:weakSelf.headerAttributes atIndex:level - 1 toString:attributedString range:range];
     }];
     
     /*** Added my own numbered list parser to also provide indents here ***/
     //Not working one: @"([\\d]+\\.\\. )(.*?)(?=([\\d]+\\.\\t)|($))"
     //Working one: @"([\\d]+\\. )(.*?)(?=([\\d]+\\.)|($))"
-    [defaultParser addLeadParsingWithPattern:@"([\\d]+\\. )(.*?)(?=([\\d]+\\.)|($))" maxLevel:0 leadFormattingBlock:^(NSMutableAttributedString * _Nonnull attributedString, NSRange range, NSUInteger level) {
+    [self addLeadParsingWithPattern:@"([\\d]+\\. )(.*?)(?=([\\d]+\\.)|($))" maxLevel:0 leadFormattingBlock:^(NSMutableAttributedString * _Nonnull attributedString, NSRange range, NSUInteger level) {
         NSMutableString *listString = [NSMutableString string];
         /*** THE FOLLOWING CODE SEEMS TO ADD UNNECESSARY TABS, NOT SURE WHY ***/
         /*while (--level) {
@@ -102,10 +100,10 @@ typedef NSFont UIFont;
         [attributedString replaceCharactersInRange:range withString:listString];
         
     } formattingBlock:^(NSMutableAttributedString * _Nonnull attributedString, NSRange range, NSUInteger level) {
-        [TSMarkdownParser addAttributes:weakParser.numberedListAttributes atIndex:level - 1 toString:attributedString range:range];
+        [TSMarkdownParser addAttributes:weakSelf.numberedListAttributes atIndex:level - 1 toString:attributedString range:range];
     }];
     
-    [defaultParser addListParsingWithMaxLevel:0 leadFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSUInteger level) {
+    [self addListParsingWithMaxLevel:0 leadFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSUInteger level) {
         NSMutableString *listString = [NSMutableString string];
         while (--level) {            
             [listString appendString:@"\t"];
@@ -113,21 +111,21 @@ typedef NSFont UIFont;
         [listString appendString:@"•\t"];
         [attributedString replaceCharactersInRange:range withString:listString];
     } textFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSUInteger level) {
-        [TSMarkdownParser addAttributes:weakParser.listAttributes atIndex:level - 1 toString:attributedString range:range];
+        [TSMarkdownParser addAttributes:weakSelf.listAttributes atIndex:level - 1 toString:attributedString range:range];
     }];
     
-    [defaultParser addQuoteParsingWithMaxLevel:0 leadFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSUInteger level) {
+    [self addQuoteParsingWithMaxLevel:0 leadFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSUInteger level) {
         NSMutableString *quoteString = [NSMutableString string];
         while (level--)
             [quoteString appendString:@"\t"];
         [attributedString replaceCharactersInRange:range withString:quoteString];
     } textFormattingBlock:^(NSMutableAttributedString * attributedString, NSRange range, NSUInteger level) {
-        [TSMarkdownParser addAttributes:weakParser.quoteAttributes atIndex:level - 1 toString:attributedString range:range];
+        [TSMarkdownParser addAttributes:weakSelf.quoteAttributes atIndex:level - 1 toString:attributedString range:range];
     }];
     
     /* bracket parsing */
     
-    [defaultParser addImageParsingWithLinkFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSString * _Nullable link) {
+    [self addImageParsingWithLinkFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSString * _Nullable link) {
         UIImage *image = [UIImage imageNamed:link];
         if (image) {
             NSTextAttachment *imageAttachment = [NSTextAttachment new];
@@ -136,7 +134,7 @@ typedef NSFont UIFont;
             NSAttributedString *imgStr = [NSAttributedString attributedStringWithAttachment:imageAttachment];
             [attributedString replaceCharactersInRange:range withAttributedString:imgStr];
         } else {
-            if (!weakParser.skipLinkAttribute) {
+            if (!weakSelf.skipLinkAttribute) {
                 NSURL *url = [NSURL URLWithString:link] ?: [NSURL URLWithString:
                                                             [link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 if (url.scheme) {
@@ -145,12 +143,12 @@ typedef NSFont UIFont;
                                              range:range];
                 }
             }
-            [attributedString addAttributes:weakParser.imageAttributes range:range];
+            [attributedString addAttributes:weakSelf.imageAttributes range:range];
         }
     }];
     
-    [defaultParser addLinkParsingWithLinkFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSString * _Nullable link) {
-        if (!weakParser.skipLinkAttribute) {
+    [self addLinkParsingWithLinkFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSString * _Nullable link) {
+        if (!weakSelf.skipLinkAttribute) {
             NSURL *url = [NSURL URLWithString:link] ?: [NSURL URLWithString:
                                                         [link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             //NSLog(@"1. Creating NSLinkAttributeName for link: %@", link);
@@ -161,13 +159,13 @@ typedef NSFont UIFont;
                                          range:range];
             }
         }
-        [attributedString addAttributes:weakParser.linkAttributes range:range];
+        [attributedString addAttributes:weakSelf.linkAttributes range:range];
     }];
     
     /* autodetection */
     
-    [defaultParser addLinkDetectionWithLinkFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSString * _Nullable link) {
-        if (!weakParser.skipLinkAttribute) {
+    [self addLinkDetectionWithLinkFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSString * _Nullable link) {
+        if (!weakSelf.skipLinkAttribute) {
             __block BOOL alreadyLinked = NO;
             [attributedString enumerateAttribute:NSLinkAttributeName
                                          inRange:range
@@ -192,28 +190,26 @@ typedef NSFont UIFont;
                                      value:url
                                      range:range];
         }
-        [attributedString addAttributes:weakParser.linkAttributes range:range];
+        [attributedString addAttributes:weakSelf.linkAttributes range:range];
     }];
     
     /* inline parsing */
     
-    [defaultParser addStrongParsingWithFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {
-        [attributedString addAttributes:weakParser.strongAttributes range:range];
+    [self addStrongParsingWithFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {
+        [attributedString addAttributes:weakSelf.strongAttributes range:range];
     }];
     
-    [defaultParser addEmphasisParsingWithFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {
-        [attributedString addAttributes:weakParser.emphasisAttributes range:range];
+    [self addEmphasisParsingWithFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {
+        [attributedString addAttributes:weakSelf.emphasisAttributes range:range];
     }];
     
     /* unescaping parsing */
     
-    [defaultParser addCodeUnescapingParsingWithFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {
-        [attributedString addAttributes:weakParser.monospaceAttributes range:range];
+    [self addCodeUnescapingParsingWithFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {
+        [attributedString addAttributes:weakSelf.monospaceAttributes range:range];
     }];
     
-    [defaultParser addUnescapingParsing];
-    
-    return defaultParser;
+    [self addUnescapingParsing];
 }
 
 + (void)addAttributes:(NSArray<NSDictionary<NSString *, id> *> *)attributesArray atIndex:(NSUInteger)level toString:(NSMutableAttributedString *)attributedString range:(NSRange)range

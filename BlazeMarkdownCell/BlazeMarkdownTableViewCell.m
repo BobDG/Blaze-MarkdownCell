@@ -31,7 +31,8 @@
     //Get string
     if(row.markdownString.length) {
         if(!self.parser) {
-            self.parser = [TSMarkdownParser standardParser];
+            self.parser = [TSMarkdownParser new];
+            [self.parser setup];
         }
         
         //TextColor
