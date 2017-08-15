@@ -72,7 +72,7 @@ typedef NSFont UIFont;
 + (instancetype)standardParser {
     TSMarkdownParser *defaultParser = [self new];
     
-    __weak TSMarkdownParser *weakParser = defaultParser;
+    __weak __typeof(TSMarkdownParser *)weakParser = defaultParser;
     
     /* escaping parsing */
     
@@ -80,7 +80,7 @@ typedef NSFont UIFont;
     
     [defaultParser addEscapingParsing];
     
-    /* block parsing */
+    /* block parsing */    
     
     [defaultParser addHeaderParsingWithMaxLevel:0 leadFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, __unused NSUInteger level) {
         [attributedString deleteCharactersInRange:range];
