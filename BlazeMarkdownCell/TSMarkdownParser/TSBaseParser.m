@@ -6,16 +6,15 @@
 //  Copyright © 2016 Computertalk Sweden. All rights reserved.
 //
 
-#import "TSBaseParser.h"
-#import <Foundation/Foundation.h>
-#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#else
-#import <AppKit/AppKit.h>
-#endif
+#import <Foundation/Foundation.h>
 
+#import "TSBaseParser.h"
 
 @interface TSExpressionBlockPair : NSObject
+{
+    
+}
 
 @property (nonatomic, strong) NSRegularExpression *regularExpression;
 @property (nonatomic, strong) TSMarkdownParserMatchBlock block;

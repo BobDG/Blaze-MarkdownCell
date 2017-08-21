@@ -6,28 +6,20 @@
 //  Copyright (c) 2014 Computertalk Sweden. All rights reserved.
 //
 
-#import "TSMarkdownParser.h"
-#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#else
-#import <AppKit/AppKit.h>
-typedef NSColor UIColor;
-typedef NSImage UIImage;
-typedef NSFont UIFont;
-#endif
+
+#import "TSMarkdownParser.h"
 
 @implementation TSMarkdownParser
 
 - (instancetype)init {
     self = [super init];
-    if (!self)
+    if (!self) {
         return nil;
+    }
     
-#if TARGET_OS_TV
-    NSUInteger defaultSize = 29;
-#else
     NSUInteger defaultSize = 12;
-#endif
+
     
     self.defaultAttributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:defaultSize] };
     
@@ -60,11 +52,7 @@ typedef NSFont UIFont;
                               NSForegroundColorAttributeName: [UIColor colorWithRed:0.95 green:0.54 blue:0.55 alpha:1] };
     _strongAttributes = @{ NSFontAttributeName: [UIFont boldSystemFontOfSize:defaultSize] };
     
-#if TARGET_OS_IPHONE
     _emphasisAttributes = @{ NSFontAttributeName: [UIFont italicSystemFontOfSize:defaultSize] };
-#else
-    _emphasisAttributes = @{ NSFontAttributeName: [[NSFontManager sharedFontManager] convertFont:[UIFont systemFontOfSize:defaultSize] toHaveTrait:NSItalicFontMask] };
-#endif
     
     return self;
 }
