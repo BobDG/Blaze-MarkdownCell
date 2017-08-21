@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 typedef void (^TSMarkdownParserMatchBlock)(NSTextCheckingResult *match, NSMutableAttributedString *attributedString);
 
 @interface TSBaseParser : NSObject
@@ -26,7 +24,7 @@ typedef void (^TSMarkdownParserMatchBlock)(NSTextCheckingResult *match, NSMutabl
 -(NSAttributedString *)attributedStringFromMarkdown:(NSString *)markdown;
 
 /// Applies attributes then markdown
--(NSAttributedString *)attributedStringFromMarkdown:(NSString *)markdown attributes:(nullable NSDictionary<NSString *, id> *)attributes;
+-(NSAttributedString *)attributedStringFromMarkdown:(NSString *)markdown attributes:(NSDictionary<NSString *, id> *)attributes;
 
 /// Applies markdown
 -(NSAttributedString *)attributedStringFromAttributedMarkdownString:(NSAttributedString *)attributedString;
@@ -35,5 +33,3 @@ typedef void (^TSMarkdownParserMatchBlock)(NSTextCheckingResult *match, NSMutabl
 -(void)addParsingRuleWithRegularExpression:(NSRegularExpression *)regularExpression block:(TSMarkdownParserMatchBlock)block;
 
 @end
-
-NS_ASSUME_NONNULL_END

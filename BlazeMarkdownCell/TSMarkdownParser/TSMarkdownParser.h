@@ -9,11 +9,10 @@
 
 #import "TSBaseParser.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^TSMarkdownParserFormattingBlock)(NSMutableAttributedString *attributedString, NSRange range);
 typedef void (^TSMarkdownParserLevelFormattingBlock)(NSMutableAttributedString *attributedString, NSRange range, NSUInteger level);
-typedef void (^TSMarkdownParserLinkFormattingBlock)(NSMutableAttributedString *attributedString, NSRange range,  NSString * _Nullable link);
+typedef void (^TSMarkdownParserLinkFormattingBlock)(NSMutableAttributedString *attributedString, NSRange range,  NSString * link);
 
 @interface TSMarkdownParser : TSBaseParser
 
@@ -76,24 +75,24 @@ typedef void (^TSMarkdownParserLinkFormattingBlock)(NSMutableAttributedString *a
 /* 2. examples regular block parsing: headers, lists and quotes */
 
 /// accepts "# text", "## text", ...
-- (void)addHeaderParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(nullable TSMarkdownParserLevelFormattingBlock)formattingBlock;
+- (void)addHeaderParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(TSMarkdownParserLevelFormattingBlock)formattingBlock;
 /// accepts "* text", "+ text", "- text", "** text", "++ text", "-- text", ...
-- (void)addListParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(nullable TSMarkdownParserLevelFormattingBlock)formattingBlock;
+- (void)addListParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(TSMarkdownParserLevelFormattingBlock)formattingBlock;
 /// accepts "> text", ">> text", ...
-- (void)addQuoteParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(nullable TSMarkdownParserLevelFormattingBlock)formattingBlock;
+- (void)addQuoteParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(TSMarkdownParserLevelFormattingBlock)formattingBlock;
 
 /* 3. examples short block parsing: headers and lists */
 /* they are discouraged and not used by standardParser */
 
 /// accepts "#text", "##text", ...
 /// (conflicts with inline parsing)
-- (void)addShortHeaderParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(nullable TSMarkdownParserLevelFormattingBlock)formattingBlock;
+- (void)addShortHeaderParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(TSMarkdownParserLevelFormattingBlock)formattingBlock;
 /// accepts "*text", "+text", "-text", "** text", "++ text", "-- text", ...
 /// (conflicts with inline parsing)
-- (void)addShortListParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(nullable TSMarkdownParserLevelFormattingBlock)formattingBlock;
+- (void)addShortListParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(TSMarkdownParserLevelFormattingBlock)formattingBlock;
 /// accepts ">text", ">>text", ...
 /// (conflicts with inline parsing)
-- (void)addShortQuoteParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(nullable TSMarkdownParserLevelFormattingBlock)formattingBlock;
+- (void)addShortQuoteParsingWithMaxLevel:(unsigned int)maxLevel leadFormattingBlock:(TSMarkdownParserLevelFormattingBlock)leadFormattingBlock textFormattingBlock:(TSMarkdownParserLevelFormattingBlock)formattingBlock;
 
 /* 4. examples inline bracket parsing: images and links */
 /* text accepts newlines and non-bracket parsing */
@@ -138,4 +137,3 @@ typedef void (^TSMarkdownParserLinkFormattingBlock)(NSMutableAttributedString *a
 
 @end
 
-NS_ASSUME_NONNULL_END
