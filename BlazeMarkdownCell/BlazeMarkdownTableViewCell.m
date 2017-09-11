@@ -128,6 +128,16 @@
         /*** The following line is not necessary since we're using TTTAttributedLabel coloring ***/
         //self.parser.linkAttributes = @{NSFontAttributeName:defaultFont, NSForegroundColorAttributeName:linksColor};
         
+        //Text-checking types - only address & phonenumber checking here. Link is already done using the parser itself, if you set this again it will reset the default links and Named links won't be colored correctly!
+        NSTextCheckingTypes textCheckingTypes = 0;
+        if(row.phoneNumberTapped) {
+            textCheckingTypes = textCheckingTypes|NSTextCheckingTypePhoneNumber;
+        }
+        if(row.addressTapped) {
+            textCheckingTypes = textCheckingTypes|NSTextCheckingTypeAddress;
+        }
+        self.markdownLabel.enabledTextCheckingTypes = textCheckingTypes;
+        
         //Generate string
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:[self.parser attributedStringFromMarkdown:row.markdownString]];
         
@@ -145,9 +155,6 @@
     
     //Performance boost
     self.markdownLabel.extendsLinkTouchArea = FALSE;
-    
-    //Text checking types - only address & phonenumber for now. Link is already done using the parser itself, if you set this again it will reset the default links and Named links won't be colored correctly!
-    self.markdownLabel.enabledTextCheckingTypes = NSTextCheckingTypeAddress|NSTextCheckingTypePhoneNumber;
 }
 
 #pragma mark - TTTAttributedLabelDelegate
