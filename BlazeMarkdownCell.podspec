@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name           = 'BlazeMarkdownCell'
-  s.version        = '0.0.11'
+  s.version        = '0.0.12'
   s.summary        = 'Markdown-cell addition to Blaze'
   s.license 	   = 'MIT'
   s.description    = 'Useful Markdown-cell addition to Blaze, using TSMarkdownParser and TTTAttributedLabel for performance and link checking'

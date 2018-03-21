@@ -88,12 +88,22 @@
             }
         }
         else {
-            [headerAttributes addObjectsFromArray:@[@{NSFontAttributeName:[UIFont systemFontOfSize:22.0f], NSForegroundColorAttributeName:headersColor},
-              @{NSFontAttributeName:[UIFont systemFontOfSize:21.0f], NSForegroundColorAttributeName:headersColor},
-              @{NSFontAttributeName:[UIFont systemFontOfSize:20.0f], NSForegroundColorAttributeName:headersColor},
-              @{NSFontAttributeName:[UIFont systemFontOfSize:19.0f], NSForegroundColorAttributeName:headersColor},
-              @{NSFontAttributeName:[UIFont systemFontOfSize:18.0f], NSForegroundColorAttributeName:headersColor},
-              @{NSFontAttributeName:[UIFont systemFontOfSize:17.0f], NSForegroundColorAttributeName:headersColor}]];
+            if(row.markdownDefaultFont) {
+                [headerAttributes addObjectsFromArray:@[@{NSFontAttributeName:[UIFont fontWithName:row.markdownDefaultFont.familyName size:22.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont fontWithName:row.markdownDefaultFont.familyName size:21.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont fontWithName:row.markdownDefaultFont.familyName size:20.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont fontWithName:row.markdownDefaultFont.familyName size:19.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont fontWithName:row.markdownDefaultFont.familyName size:18.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont fontWithName:row.markdownDefaultFont.familyName size:17.0f], NSForegroundColorAttributeName:headersColor}]];
+            }
+            else {
+                [headerAttributes addObjectsFromArray:@[@{NSFontAttributeName:[UIFont systemFontOfSize:22.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont systemFontOfSize:21.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont systemFontOfSize:20.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont systemFontOfSize:19.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont systemFontOfSize:18.0f], NSForegroundColorAttributeName:headersColor},
+                                                        @{NSFontAttributeName:[UIFont systemFontOfSize:17.0f], NSForegroundColorAttributeName:headersColor}]];
+            }
         }
         
         //Parser attributes
