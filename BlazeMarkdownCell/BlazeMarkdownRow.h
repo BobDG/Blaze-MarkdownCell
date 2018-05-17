@@ -16,6 +16,9 @@
 //String
 @property(nonatomic,strong) NSString *markdownString;
 
+//Alignment
+@property(nonatomic,strong) NSNumber *textAlignment;
+
 //Fonts
 @property(nonatomic,strong) UIFont *markdownBoldFont;
 @property(nonatomic,strong) UIFont *markdownItalicFont;

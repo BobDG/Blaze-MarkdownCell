@@ -151,6 +151,13 @@
         //Generate string
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:[self.parser attributedStringFromMarkdown:row.markdownString]];
         
+        //Alignment
+        if(row.textAlignment) {
+            NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+            [paragraphStyle setAlignment:(NSTextAlignment)row.textAlignment.intValue];
+            [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attributedString.string.length)];
+        }
+        
         //Finally set it
         self.markdownLabel.text = attributedString;       
     }

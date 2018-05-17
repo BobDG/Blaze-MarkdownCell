@@ -17,15 +17,12 @@ Paragraphs must be separated by a blank line. Basic formatting of *italics* and 
 1. Item 1
 2. A second item
 3. Number 3, let's try the second line indent as well by having a lot of text to force multiple lines
-4. Ⅳ
-
-*Note: the fourth item uses the Unicode character for [Roman numeral four][2].*
 
 ### Unordered list
 
 * An item
 * Another item
-* Yet another item with multiple lines, should still indent correctly on the second line as well. It works! :)
+* Yet another item with multiple lines, should still indent correctly on the second line as well. It works as long as you don't set the text alignment!
 * And there's more...
 
 
@@ -47,8 +44,8 @@ I don't recommend using more than three or four levels of headings here, because
 
 URLs can be made in a handful of ways:
 
-* A named link to [MarkItDown](http://www.markitdown.net/) I still need to work on fixing link-colors to work here as well. More a TTTAttributedLabel issue I think.
-* Sometimes you just want a URL like <http://www.markitdown.net/>.
+* A named link to [MarkItDown](http://www.markitdown.net/) Looks good doesn't it! :)
+* Sometimes you just want a link-URL fully written like http://www.markitdown.net/. Also possible!
 
 ## Images
 
