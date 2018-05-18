@@ -50,7 +50,7 @@
     markdownRow.markdownLinksColor = UIColorFromRGB(0xf8a19a);
     markdownRow.markdownActiveLinksColor = [UIColor yellowColor];
     markdownRow.markdownHeaderColor = [UIColor blackColor];
-    //markdownRow.textAlignment = @(NSTextAlignmentLeft); //This works but does mess up automatic list indentations. So only use if you need centered text or something like that
+    //markdownRow.textAlignmentType = @(NSTextAlignmentCenter); //This works but does mess up automatic list indentations. So only use if you need centered text or something like that
     [markdownRow setLinkTapped:^(NSURL *url) {
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }];

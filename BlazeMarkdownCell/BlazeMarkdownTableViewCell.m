@@ -152,9 +152,9 @@
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:[self.parser attributedStringFromMarkdown:row.markdownString]];
         
         //Alignment
-        if(row.textAlignment) {
+        if(row.textAlignmentType) {
             NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-            [paragraphStyle setAlignment:(NSTextAlignment)row.textAlignment.intValue];
+            [paragraphStyle setAlignment:(NSTextAlignment)row.textAlignmentType.intValue];
             [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attributedString.string.length)];
         }
         
